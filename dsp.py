@@ -7,9 +7,7 @@ import matplotlib.pyplot as plt
 
 def note_detect(audio_file):
 
-	#-------------------------------------------
-	#here we are just storing our sound file as a numpy array
-	#you can also use any other method to store the file as an np array
+	
 	file_length=audio_file.getnframes() 
 	f_s=audio_file.getframerate() #sampling frequency
 	sound = np.zeros(file_length) #blank array
