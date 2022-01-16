@@ -85,6 +85,6 @@ def note_detect(wav_file):
 
 if __name__ == "__main__":
 
-        wav_file = wave.open("D:\jest\MSU\BSECE 3RD YEAR\ECE120-E16-3 Digital Signal Processing\francis repo\ECE120Project\wav files_c4.wav")
+        wav_file = wave.open("wav files_c4.wav")
         Detected_Note = note_detect(wav_file)
         print("\n\tDetected Note = " + str(Detected_Note))
