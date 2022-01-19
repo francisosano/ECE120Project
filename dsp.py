@@ -19,6 +19,9 @@ def note_detect(wav_file):
         f_s = wav_file.getframerate()
         sound=np.zeros(file_length)
 
+        print(file_length)
+        print(f_s)
+    
 
         for i in range(file_length):
             wdata=wav_file.readframes(1)
@@ -91,6 +94,6 @@ def note_detect(wav_file):
 
 if __name__ == "__main__":
     #define wav file
-        wav_file = wave.open("wav files_c6.wav")
+        wav_file = wave.open("wav files_c4.wav")
         Detected_Note = note_detect(wav_file)
         print("\n\tDetected Note = " + str(Detected_Note))
