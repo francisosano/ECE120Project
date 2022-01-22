@@ -21,7 +21,7 @@ def note_detect(wav_file):
 
         for i in range(file_length):
             wdata=wav_file.readframes(1)
-            data=struct.unpack("<f", wdata)
+            data=struct.unpack("<h", wdata)
             sound[i] = float(data[0])
 
         print(wdata)
@@ -32,7 +32,7 @@ def note_detect(wav_file):
         plt.plot(sound)
         plt.show()
 
-        sound=np.divide(sound/0.00005,float(2**15)) #normalization
+        sound=np.divide(sound,float(2**15)) #normalization
         counter = wav_file.getnchannels() #number of channels mono/sterio
 	    #-------------------------------------------
         print(sound)
@@ -99,6 +99,6 @@ def note_detect(wav_file):
 
 if __name__ == "__main__":
     #define wav file
-        wav_file = wave.open("unknown.wav")
+        wav_file = wave.open("wav files_c6.wav")
         Detected_Note = note_detect(wav_file)
         print("\n\tDetected Note = " + str(Detected_Note))
