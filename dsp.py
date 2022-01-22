@@ -3,11 +3,7 @@ import numpy as np
 import wave
 import struct
 import matplotlib.pyplot as plt
-import scipy
-from scipy.fft import fft, fftfreq, ifft
-from pydub import AudioSegment
-from pydub.playback import play
-
+from scipy.fft import fft
 
 
 def note_detect(wav_file):
@@ -36,7 +32,7 @@ def note_detect(wav_file):
         plt.plot(sound)
         plt.show()
 
-        sound=np.divide(sound,float(2**15)) #normalization
+        sound=np.divide(sound/0.00005,float(2**15)) #normalization
         counter = wav_file.getnchannels() #number of channels mono/sterio
 	    #-------------------------------------------
         print(sound)
@@ -51,7 +47,8 @@ def note_detect(wav_file):
         fourier = np.abs(fourier)
         imax=np.argmax(fourier[0:int(file_length)]) #index of max element
             
-        print(fourier)	
+        print(fourier)
+        print(imax)	
 
         plt.plot(fourier)
         plt.show()
@@ -68,8 +65,12 @@ def note_detect(wav_file):
                     break
         i_end = i
         imax = np.argmax(fourier[0:i_end+100])
+        print(imax)
             
         freq=(imax*f_s)/(file_length*counter) #formula to convert index into sound frequency
+        
+        print(freq)
+        print(i_end)
             
             #chord database
         note=0
@@ -83,13 +84,17 @@ def note_detect(wav_file):
                         break
                     if(freq>frequencies[-1]):
                         note=name[-1]
+                        
                         break
                     if freq>=frequencies[i] and frequencies[i+1]>=freq :
                         if freq-frequencies[i]<(frequencies[i+1]-frequencies[i])/2 :
                             note=name[i]
+                            
                         else :
                             note=name[i+1]
+                            
                         break
+        print(note)
         return note
 
 if __name__ == "__main__":
